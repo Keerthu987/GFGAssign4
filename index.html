@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GFG Assign 4</title>
+  </head>
+  <body>
+    <h2>GFG Assignment 4</h2>
+    <div id="app">
+      <select name="" id="select-soap">
+        <option value="">---Select An option---</option>
+      </select>
+      <button id="btn">Add to Favourites</button>
+      <ul id="show-fav"></ul>
+    </div>
+
+    <script>
+      let soaps = ["ABC", "Doves", "Luxes"];
+      let selectedSoapDropDown = document.getElementById("select-soap");
+      let showFav = document.getElementById("show-fav");
+      let btn = document.getElementById("btn");
+      let favSoaps = [];
+
+      for (let soap of soaps) {
+        let opt = document.createElement("option");
+        opt.setAttribute("value", soap);
+        opt.innerText = soap;
+
+        selectedSoapDropDown.appendChild(opt);
+      }
+      selectedSoapDropDown.addEventListener("change", () => {
+        btn.addEventListener("click", () => {
+          let soap = selectedSoapDropDown.value;
+          let isSoapAdded = favSoaps?.some((fav) => fav === soap);
+          favSoaps = !isSoapAdded ? [...favSoaps, soap] : favSoaps;
+          displaySelected(favSoaps);
+        });
+      });
+
+      function displaySelected(favSoaps) {
+        showFav.innerHTML = "";
+        for (let fav of favSoaps) {
+          let list = document.createElement("li");
+          list.innerText = fav;
+          showFav.appendChild(list);
+        }
+      }
+    </script>
+  </body>
+</html>
